@@ -2,34 +2,15 @@ import React from "react";
 import "./App.css";
 import NavBar from "./Components/NavBar";
 import Router from "./Router";
-import LoginPage from "./Components/LoginPage";
+import { BrowserRouter } from "react-router-dom";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loggedIn: false,
-    };
-  }
-
-  handleClick = (e) => {
-    // e.preventDefault()
-    this.setState({
-      loggedIn: true,
-    });
-  };
-  render() {
-    return this.state.loggedIn ? (
-      <div>
-        {" "}
-        <NavBar /> <Router />{" "}
-      </div>
-    ) : (
-      <div className="App">
-        <LoginPage onClick={this.handleClick} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Router />
+    </BrowserRouter>
+  );
+};
 
 export default App;

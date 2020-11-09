@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -26,27 +26,36 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = (props) => {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    amount: "",
+  const [values, setValues] = useState({
+    username: "",
     password: "",
-    weight: "",
-    weightRange: "",
     showPassword: false,
   });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (prop) => (e) => {
+    setValues({ ...values, [prop]: e.target.value });
   };
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    document.cookie = "loggedIn = true; max-age = 60*1000";
+    // props.userLogin(userName);
+    props.history.push("/");
   };
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
       <TextField
         id="standard-username-input"
         label="Username"
@@ -77,7 +86,7 @@ const LoginPage = (props) => {
       <br />
       <br />
       <Button
-        onClick={props.onClick}
+        type="submit"
         variant="contained"
         size="small"
         color="primary"
