@@ -1,16 +1,33 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import HomePage from './Components/HomePage/HomePage'
-import PersonalInfo from './Components/PersonalInfo/PersonalInfo'
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import HomePage from "./Components/HomePage";
+import PersonalInfo from "./Components/PersonalInfo";
+import cookie from "cookie";
 
+const checkAuth = () => {
+  const cookies = cookie.parse(document.cookie);
+  return cookies["loggedIn"] ? true : false;
+};
 
-const Router = () =>{
-    return(
-        <Switch>
-            <Route exact path='/' component={HomePage}/>
-            <Route path='/personalinfo' component={PersonalInfo}/>
-        </Switch>
-    )
-}
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        checkAuth() ? <Component {...props} /> : <Redirect to="./login" />
+      }
+    />
+  );
+};
 
-export default Router
+const Router = () => {
+  return (
+    <Switch>
+      <Route path="/login" component={LoginPage}></Route>
+      <ProtectedRoute exact path="/" component={HomePage} />
+      <ProtectedRoute path="/personalinfo" component={PersonalInfo} />
+    </Switch>
+  );
+};
+
+export default Router;

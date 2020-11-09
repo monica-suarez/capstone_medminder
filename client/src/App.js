@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./Components/NavBar/NavBar";
+import NavBar from "./Components/NavBar";
 import Router from "./Router";
-import LoginPage from "./Components/LoginPage/LoginPage";
+import LoginPage from "./Components/LoginPage";
 
 class App extends React.Component {
   constructor(props) {
