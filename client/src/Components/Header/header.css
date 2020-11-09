@@ -1,0 +1,11 @@
+.header {
+  background-color: lightseagreen;
+  background-image: url(../../pattern.png);
+  color: ivory;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}

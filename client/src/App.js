@@ -1,14 +1,23 @@
 import React from "react";
 import "./App.css";
 import NavBar from "./Components/NavBar";
-import Router from "./Router";
+// import LoginPage from "./Components/LoginPage";
+import Router, { checkAuth } from "./Router";
 import { BrowserRouter } from "react-router-dom";
+// import Header from "./Components/Header";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <NavBar />
-      <Router />
+      {checkAuth() ? (
+        <div>
+          <NavBar /> <Router />
+        </div>
+      ) : (
+        <div>
+          <Router />
+        </div>
+      )}
     </BrowserRouter>
   );
 };

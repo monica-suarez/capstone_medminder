@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Header from "../Header";
 
-const PersonalInfo = () =>{
-    return(
-        <h1>Personal Info Test</h1>
-    )
-}
+const PersonalInfo = () => {
+  return (
+    <div>
+      <Header />
+      <h1>Personal Info Test</h1>
+    </div>
+  );
+};
 
-export default PersonalInfo
+export default PersonalInfo;

@@ -5,7 +5,7 @@ import PersonalInfo from "./Components/PersonalInfo";
 import LoginPage from "./Components/LoginPage";
 import cookie from "cookie";
 
-const checkAuth = () => {
+export const checkAuth = () => {
   const cookies = cookie.parse(document.cookie);
   return cookies["loggedIn"] ? true : false;
 };
