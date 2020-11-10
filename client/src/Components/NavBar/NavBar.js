@@ -50,14 +50,14 @@ const NavBar = () => {
           />
         </IconButton>
 
-        <IconButton>
+        <IconButton onClick={() => window.location.replace("./medications")}>
           <LocalHospitalIcon
             alt="medication list"
             style={{ fontSize: 40 }}
             className="icons"
           />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => window.location.replace("./medicationlog")}>
           <MenuBookIcon
             alt="dosage log"
             style={{ fontSize: 40 }}

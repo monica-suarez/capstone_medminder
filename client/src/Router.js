@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./Components/HomePage";
 import PersonalInfo from "./Components/PersonalInfo";
 import LoginPage from "./Components/LoginPage";
+import MedList from "./Components/MedList";
+import MedLog from "./Components/MedLog";
 import cookie from "cookie";
 
 export const checkAuth = () => {
@@ -27,6 +29,8 @@ const Router = () => {
       <Route path="/login" component={LoginPage}></Route>
       <ProtectedRoute exact path="/" component={HomePage} />
       <ProtectedRoute path="/personalinfo" component={PersonalInfo} />
+      <ProtectedRoute path="/medications" component={MedList} />
+      <ProtectedRoute path="/medicationlog" component={MedLog} />
     </Switch>
   );
 };
