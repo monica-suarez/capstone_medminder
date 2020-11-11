@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Paper,
   Box,
   TextField,
   Button,
@@ -20,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       width: "23ch",
-      marginTop: 50,
     },
     textField: {
       width: "25ch",
@@ -62,52 +62,57 @@ const LoginPage = (props) => {
         flexDirection="column"
         alignItems="center"
       >
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            id="standard-username-input"
-            label="Username"
-            type="username"
-          />
-          <br />
-          <FormControl className={clsx(classes.margin, classes.textField)}>
-            <InputLabel htmlFor="standard-adornment-password">
-              Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              autoComplete="current-password"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
+        <Paper elevation={5} className="login-form">
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              id="standard-username-input"
+              label="Username"
+              type="username"
             />
-          </FormControl>
+            <br />
+            <FormControl className={clsx(classes.margin, classes.textField)}>
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                id="standard-adornment-password"
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                autoComplete="current-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <br />
+            <br />
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              size="small"
+              color="secondary"
+              className={classes.margin}
+              disableElevation
+            >
+              Log In
+            </Button>
+          </form>
           <br />
           <br />
-          <Button
-            type="submit"
-            variant="contained"
-            size="small"
-            color="secondary"
-            className={classes.margin}
-            disableElevation
-          >
-            Log In
-          </Button>
-        </form>
-        <Link to="/signup" className="signup-anchor">
-          New user? Sign up here.
-        </Link>
+          <Link to="/signup" className="signup-anchor">
+            New user? Sign up here
+          </Link>
+        </Paper>
       </Box>
     </div>
   );

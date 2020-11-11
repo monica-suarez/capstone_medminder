@@ -3,9 +3,9 @@ import "./header.css";
 
 const Header = () => {
   return (
-    <header className="header">
-      <div className="title">MedMinder</div>
-      <h3>This app will remind you</h3>
+    <header className="login-header">
+      <div className="login-title">MedMinder</div>
+      <h3>Never Forget Your Meds Again</h3>
     </header>
   );
 };

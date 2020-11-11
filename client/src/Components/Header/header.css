@@ -1,4 +1,4 @@
-.header {
+.login-header {
   background-color: lightseagreen;
   background-image: url(../../pattern.png);
   color: ivory;
@@ -11,6 +11,6 @@
   font-family: "Cabin", sans-serif;
   font-weight: bolder;
 }
-.title {
+.login-title {
   font-size: 72px;
 }
