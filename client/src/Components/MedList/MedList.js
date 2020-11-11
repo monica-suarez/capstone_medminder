@@ -3,8 +3,8 @@ import React from "react";
 import Header from "../Header";
 
 const MedList = () => {
-  const key = process.env.API_KEY;
-  console.log(typeof key);
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  console.log(typeof API_KEY);
   return (
     <div>
       <header className="page-header">
