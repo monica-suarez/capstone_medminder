@@ -12,7 +12,9 @@ import {
   Input,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import Header from "../Header";
+import "./login.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +49,8 @@ const LoginPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
-    // props.userLogin(userName);
-    props.history.push("/");
+    // props.history.push("/");
+    window.location.replace("/");
   };
 
   return (
@@ -103,6 +105,9 @@ const LoginPage = (props) => {
             Log In
           </Button>
         </form>
+        <Link to="/signup" className="signup-anchor">
+          New user? Sign up here.
+        </Link>
       </Box>
     </div>
   );
