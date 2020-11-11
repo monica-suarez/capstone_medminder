@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+// import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  logout: {
+    marginLeft: "auto",
+  },
 }));
 
 const NavBar = () => {
@@ -32,9 +36,9 @@ const NavBar = () => {
   return (
     <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Toolbar className="toolbar">
-        <IconButton edge="start" color="inherit" aria-label="open drawer">
+        {/* <IconButton edge="start" color="inherit" aria-label="open drawer">
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton onClick={() => window.location.replace("./")}>
           <HomeIcon
             alt="home page"
@@ -64,6 +68,17 @@ const NavBar = () => {
             className="icons"
           />
         </IconButton>
+        <div
+          className={classes.logout}
+          onClick={() => {
+            document.cookie = "loggedIn=";
+            window.location.replace("/login");
+          }}
+        >
+          <Link className="logout" to="/login">
+            Log Out
+          </Link>
+        </div>
       </Toolbar>
     </AppBar>
   );

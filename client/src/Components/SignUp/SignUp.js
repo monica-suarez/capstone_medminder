@@ -61,7 +61,6 @@ const SignUp = () => {
   return (
     <div>
       <Header />
-
       <Box
         className={classes.formBox}
         display="flex"
@@ -69,6 +68,7 @@ const SignUp = () => {
         flexWrap="nowrap"
         alignItems="center"
       >
+        <div className="signup-header">Please complete signup below:</div>
         <Paper elevation={5} className="paper-signup">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -149,9 +149,9 @@ const SignUp = () => {
             </Button>
           </form>
         </Paper>
+        <br />
+        <Link to="/login">Back to Login</Link>
       </Box>
-      <br />
-      <Link to="/login">Back to Login</Link>
     </div>
   );
 };

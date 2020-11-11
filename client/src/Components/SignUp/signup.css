@@ -1,4 +1,9 @@
-.paper-signup {
+.signup-header {
   margin-top: 50px;
+  font-size: 1.2rem;
+  color: rgb(121, 119, 119);
+}
+.paper-signup {
+  margin-top: 20px;
   padding: 20px;
 }

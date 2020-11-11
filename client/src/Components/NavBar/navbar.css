@@ -1,6 +1,17 @@
-.toolbar{
-    background-color: lightseagreen;
+.toolbar {
+  background-color: lightseagreen;
+  font-family: "Cabin", sans-serif;
 }
-.icons{
-    color: ivory;
+
+.icons {
+  color: ivory;
+}
+.logout {
+  color: ivory;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+.logout:hover {
+  text-decoration: underline;
+  color: rgb(255, 226, 131);
 }
