@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div>
       {checkAuth() ? (
-        <Slide direction="down" in={checkAuth()}>
+        <Slide direction="right" in={checkAuth()}>
           <Paper className={classes.welcome}>
             <Typography>Welcome: user name here</Typography>
           </Paper>
