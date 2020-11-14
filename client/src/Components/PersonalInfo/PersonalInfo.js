@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../Header";
+import "../MedList/medlist.css";
 
 const PersonalInfo = () => {
   return (
@@ -8,7 +9,7 @@ const PersonalInfo = () => {
         <div>Personal Profile</div>
       </header>
       <Header />
-      <h1>personal prof</h1>
+      <h1 className="alert-title">Edit/Delete Profile:</h1>
     </div>
   );
 };

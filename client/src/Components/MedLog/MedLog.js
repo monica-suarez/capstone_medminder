@@ -1,14 +1,15 @@
 import React from "react";
 import Header from "../Header";
+import "../MedList/medlist.css";
 
 const MedLog = () => {
   return (
     <div>
       <header className="page-header">
-        <div>Dosage Log</div>
+        <div>Dose Log</div>
       </header>
       <Header />
-      <h1>This is the MedLog</h1>
+      <h1 className="alert-title">Doses Taken:</h1>
     </div>
   );
 };

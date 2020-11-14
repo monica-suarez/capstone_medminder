@@ -1,0 +1,12 @@
+.alert-title {
+  text-align: center;
+  font-weight: bolder;
+  margin-top: 50px;
+}
+.med-form {
+  padding: 30px;
+  margin-top: 30px;
+}
+.dose-select {
+  margin-top: 20px;
+}

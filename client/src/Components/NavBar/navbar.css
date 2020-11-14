@@ -6,6 +6,10 @@
 .icons {
   color: ivory;
 }
+.icons:hover {
+  color: rgb(255, 226, 131);
+}
+
 .logout {
   color: ivory;
   text-decoration: none;
