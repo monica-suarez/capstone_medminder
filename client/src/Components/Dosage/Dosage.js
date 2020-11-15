@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
   },
   alertLabel: {
-    color: "gray",
+    color: "slate",
   },
   doseTimes: {
     minWidth: 260,
