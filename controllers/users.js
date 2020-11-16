@@ -2,6 +2,23 @@ const mysql = require("mysql");
 const pool = require("../sql/connection");
 const { handleSQLError } = require("../sql/error");
 
+const getAllUsers = (req, res) => {
+  pool.query("SELECT * FROM users", (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+};
+
+const getUserById = (req, res) => {
+  let sql = "SELECT * FROM users WHERE id = ?";
+  sql = mysql.format(sql, [req.params.id]);
+
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+};
+
 const createUser = (req, res) => {
   const {
     firstName,
@@ -33,5 +50,7 @@ const createUser = (req, res) => {
 };
 
 module.exports = {
+  getAllUsers,
+  getUserById,
   createUser,
 };
