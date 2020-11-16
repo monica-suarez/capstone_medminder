@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  input: {
+    color: "red",
+  },
   addIcon: {
     paddingLeft: "5%",
   },
@@ -53,12 +56,14 @@ const Dosage = () => {
             justifyContent="space-between"
           >
             <TextField
+              color="secondary"
               id="time"
               type="time"
               defaultValue="07:30"
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
+                className: classes.input,
               }}
               inputProps={{
                 step: 300, // 5 min
