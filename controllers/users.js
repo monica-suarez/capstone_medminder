@@ -49,8 +49,51 @@ const createUser = (req, res) => {
   });
 };
 
+const updateUserById = (req, res) => {
+  const {
+    firstName,
+    middleName,
+    lastName,
+    dateOfBirth,
+    email,
+    phone,
+    username,
+    password,
+  } = req.body;
+  let sql =
+    "UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, date_of_birth = ?, email = ?, phone = ?, username = ?, password = ? WHERE id = ?";
+  sql = mysql.format(sql, [
+    firstName,
+    middleName,
+    lastName,
+    dateOfBirth,
+    email,
+    phone,
+    username,
+    password,
+    req.params.id,
+  ]);
+
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err);
+    return res.status(204).json();
+  });
+};
+
+const deleteUserByUsername = (req, res) => {
+  let sql = "DELETE FROM users WHERE username = ?";
+  sql = mysql.format(sql, [req.params.username]);
+
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err);
+    return res.json({ message: `Deleted ${results.affectedRows} user(s)` });
+  });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  updateUserById,
+  deleteUserByUsername,
 };
