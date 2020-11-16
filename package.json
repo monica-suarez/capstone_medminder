@@ -1,0 +1,19 @@
+{
+  "name": "capstone_medminder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monica-suarez/capstone_medminder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monica-suarez/capstone_medminder/issues"
+  },
+  "homepage": "https://github.com/monica-suarez/capstone_medminder#readme"
+}
