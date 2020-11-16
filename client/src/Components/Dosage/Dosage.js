@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, TextField, Box } from "@material-ui/core";
+import { TextField, Box } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     color: "red",
+    backgroundColor: "red",
   },
   addIcon: {
     paddingLeft: "5%",
@@ -38,15 +39,15 @@ const Dosage = () => {
   const classes = useStyles();
   return (
     <div className={classes.alertBody}>
-      <label className={classes.alertLabel} for="doseTime">
+      <label className={classes.alertLabel} htmlFor="doseTime">
         Alert Time:
       </label>
-      <Paper name="doseTime" className={classes.doseTimes} elevation={3}>
-        <form
+      <div name="doseTime" className={classes.doseTimes} elevation={3}>
+        <div
           className={classes.container}
           display="flex"
           flex-direction="row"
-          justifyContent="space-between"
+          justifycontent="space-between"
           noValidate
         >
           <Box
@@ -71,8 +72,8 @@ const Dosage = () => {
             />
             <AddCircleIcon className={classes.addIcon} color="secondary" />
           </Box>
-        </form>
-      </Paper>
+        </div>
+      </div>
     </div>
   );
 };
