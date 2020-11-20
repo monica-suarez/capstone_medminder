@@ -8,10 +8,10 @@ class Connection {
       console.log("creating connection...");
       this.pool = mysql.createPool({
         connectionLimit: 100,
-        host: "34.69.134.247",
+        host: "34.122.62.65",
         user: "root",
         password: process.env.DB_PASSWORD,
-        database: "admin",
+        database: "medminder",
       });
 
       return this.pool;
