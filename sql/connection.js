@@ -11,7 +11,7 @@ class Connection {
         host: "34.122.62.65",
         user: "root",
         password: process.env.DB_PASSWORD,
-        database: "medminder",
+        database: "capstone_medminder",
       });
 
       return this.pool;
