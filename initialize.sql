@@ -15,3 +15,5 @@ CREATE TABLE users (
     PRIMARY KEY (id)
 );
 
+INSERT INTO users (first_name, last_name, date_of_birth, email, username, password)
+VALUES ("Test", "User", "1111-11-11", "testuser@testing.com", "testusername", "testpassword" )
