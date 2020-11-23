@@ -1,2 +1,5 @@
 #db password
 .env
+
+#node modules
+node_modules
