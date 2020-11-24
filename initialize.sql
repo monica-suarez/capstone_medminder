@@ -1,6 +1,8 @@
 USE capstone_medminder;
 
-DROP TABLE IF EXISTS users;
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS users, medications, medication_dose;
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -12,8 +14,34 @@ CREATE TABLE users (
     phone VARCHAR(25),
     username VARCHAR(25) NOT NULL,
     password VARCHAR(25) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE KEY (username)
+);
+
+CREATE TABLE medications ( 
+    med_id INT NOT NULL AUTO_INCREMENT,
+    medication_name VARCHAR(50) NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY (med_id),
+    FOREIGN KEY (user_id)
+    REFERENCES users (id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE medication_doses (
+    dose_id INT NOT NULL AUTO_INCREMENT,
+    dose TIME NOT NULL, 
+    user_id INT NOT NULL,
+    medication_id INT NOT NULL, 
+    PRIMARY KEY (dose_id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (medication_id) REFERENCES medications (med_id)
+    ON DELETE CASCADE
 );
 
 INSERT INTO users (first_name, last_name, date_of_birth, email, username, password)
-VALUES ("Test", "User", "1111-11-11", "testuser@testing.com", "testusername", "testpassword" )
+VALUES ("Test", "User", "1111-11-11", "testuser@testing.com", "testusername", "testpassword" ),
+("Test2", "User2", "1111-11-22", "testuser2@testing.com", "testusername2", "testpassword2" );
+
+-- INSERT INTO medications (medication_name, user_id)
+-- VALUES ("Metaformin")

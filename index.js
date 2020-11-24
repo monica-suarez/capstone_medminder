@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 4007;
 
 app.use(bodyParser.json());
-app.use("/users", usersRouter);
+app.use("/", usersRouter);
 // app.use("/medications", medRouter);
 
 app.get("/", (req, res) => {
