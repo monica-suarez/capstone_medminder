@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Box } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 const useStyles = makeStyles((theme) => ({
   alertBody: {
@@ -31,12 +32,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "red",
   },
   addIcon: {
-    paddingLeft: "5%",
+    paddingLeft: 20,
   },
 }));
 
-const Dosage = () => {
+const Dosage = (props) => {
   const classes = useStyles();
+  // const [addDose, setAddDose] = useState([]);
+  // const [removeDose, setRemoveDose] = useState([]);
+  const handleAdd = (e) => {
+    e.preventDefault();
+    props.handleAddDose(!props.addDose);
+  };
   return (
     <div className={classes.alertBody}>
       <label className={classes.alertLabel} htmlFor="doseTime">
@@ -70,7 +77,19 @@ const Dosage = () => {
                 step: 300, // 5 min
               }}
             />
-            <AddCircleIcon className={classes.addIcon} color="secondary" />
+            <AddCircleIcon
+              className={classes.addIcon}
+              id="add-alert"
+              color="secondary"
+              aria-label="add alert time"
+              name="addDose"
+              onClick={handleAdd}
+            />
+            <RemoveCircleIcon
+              className={classes.addIcon}
+              id="remove-alert"
+              arial-label="remove alert time"
+            />
           </Box>
         </div>
       </div>
