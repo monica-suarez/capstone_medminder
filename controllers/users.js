@@ -42,9 +42,9 @@ const createUser = (req, res) => {
     username,
     password,
   ]);
-  pool.query(sql, (err, results) => {
+  pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
-    return res.json({ newId: results.insertId });
+    return res.json({ newId: res.insertId });
   });
 };
 
@@ -72,7 +72,7 @@ const updateUserById = (req, res) => {
     password,
   ]);
 
-  pool.query(sql, (err, results) => {
+  pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
     return res.status(204).json();
   });
@@ -82,9 +82,9 @@ const deleteUserByUsername = (req, res) => {
   let sql = "DELETE FROM users WHERE username = ?";
   sql = mysql.format(sql, [req.params.username]);
 
-  pool.query(sql, (err, results) => {
+  pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
-    return res.json({ message: `Deleted ${results.affectedRows} user(s)` });
+    return res.json({ message: `Deleted ${res.affectedRows} user(s)` });
   });
 };
 

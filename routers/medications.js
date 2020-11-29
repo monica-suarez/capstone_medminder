@@ -1,15 +1,15 @@
 const express = require("express");
-// const medController = require('../controllers/medications');
+const medController = require("../controllers/medications");
 const router = express.Router();
 
-// router.get("/users", usersController.getAllUsers);
+router.get("/medications", medController.getAllMedications);
 
-// router.get("/users/:id", usersController.getUserById);
+router.get("/users/:med_id", medController.getMedicationById);
 
-// router.post("/users", usersController.createUser);
+router.post("/medications", medController.createMedication);
 
-// router.put("/users/:id", usersController.updateUserById);
+router.put("/medications/:med_id", medController.updateMedicationById);
 
-// router.delete("/users/:username", usersController.deleteUserByUsername);
+router.delete("/users/:med_id", medController.deleteMedicationById);
 
 module.exports = router;

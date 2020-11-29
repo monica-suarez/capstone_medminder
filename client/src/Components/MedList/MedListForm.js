@@ -27,7 +27,9 @@ const MedListForm = () => {
   //   "https://api.fda.gov/drug/event.json?api_key=API_KEY&search=openfda.brand_name:";
   console.log(typeof API_KEY);
 
-  const [addDose, setAddDose] = useState(false);
+  const [addDose, setAddDose] = useState([]);
+  const [removeDose, setRemoveDose] = useState([...addDose]);
+
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
@@ -120,8 +122,14 @@ const MedListForm = () => {
                 />
               )}
             />
-            <Dosage addDose={addDose} handleAddDose={setAddDose} />
+            <Dosage
+              addDose={addDose}
+              handleAddDose={setAddDose}
+              removeDose={removeDose}
+              handleRemoveDose={setRemoveDose}
+            />
             <div>{addDose === true ? <Dosage /> : ""}</div>
+            <div>{removeDose === false ? <Dosage /> : ""}</div>
             {/* <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="dosePerDay">Times Taken Per Day</InputLabel>
                 <Select

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Box } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import "./medlist.css";
 
 const useStyles = makeStyles((theme) => ({
   alertBody: {
@@ -33,16 +34,20 @@ const useStyles = makeStyles((theme) => ({
   },
   addIcon: {
     paddingLeft: 20,
+    cursor: "pointer",
+    transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;",
   },
 }));
 
 const Dosage = (props) => {
   const classes = useStyles();
-  // const [addDose, setAddDose] = useState([]);
-  // const [removeDose, setRemoveDose] = useState([]);
   const handleAdd = (e) => {
     e.preventDefault();
     props.handleAddDose(!props.addDose);
+  };
+  const handleRemove = (e) => {
+    e.preventDefault();
+    props.handleRemoveDose(!props.removeDose);
   };
   return (
     <div className={classes.alertBody}>
@@ -81,14 +86,15 @@ const Dosage = (props) => {
               className={classes.addIcon}
               id="add-alert"
               color="secondary"
-              aria-label="add alert time"
+              alt="add alert time"
               name="addDose"
               onClick={handleAdd}
             />
             <RemoveCircleIcon
               className={classes.addIcon}
               id="remove-alert"
-              arial-label="remove alert time"
+              alt="remove alert time"
+              onClick={handleRemove}
             />
           </Box>
         </div>

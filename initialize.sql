@@ -28,16 +28,28 @@ CREATE TABLE medications (
     ON DELETE CASCADE
 );
 
-CREATE TABLE medication_doses (
-    dose_id INT NOT NULL AUTO_INCREMENT,
-    dose TIME NOT NULL, 
+CREATE TABLE medication_alerts (
+    alert_id INT NOT NULL AUTO_INCREMENT,
+    alert TIME NOT NULL, 
     user_id INT NOT NULL,
     medication_id INT NOT NULL, 
-    PRIMARY KEY (dose_id),
+    PRIMARY KEY (alert_id),
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (medication_id) REFERENCES medications (med_id)
     ON DELETE CASCADE
 );
+
+CREATE TABLE dose_log (
+    dose_id INT NOT NULL AUTO_INCREMENT,
+    dose_time TIME NOT NULL,
+    user_id INT NOT NULL, 
+    medication_id INT NOT NULL,
+    medalert_id INT NOT NULL, 
+    PRIMARY KEY (dose_id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (medication_id) REFERENCES medications (med_id),
+    FOREIGN KEY (medalert_id) REFERENCES medication_alerts (alert_id)
+)
 
 INSERT INTO users (first_name, last_name, date_of_birth, email, username, password)
 VALUES ("Test", "User", "1111-11-11", "testuser@testing.com", "testusername", "testpassword" ),
