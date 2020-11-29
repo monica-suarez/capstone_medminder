@@ -12,7 +12,6 @@ const getAllMedAlerts = (req, res) => {
 const getMedAlertById = (req, res) => {
   let sql = "SELECT * FROM medication_alerts WHERE alert_id = ?";
   sql = mysql.format(sql, [req.params.id]);
-
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
@@ -23,9 +22,9 @@ const createMedAlert = (req, res) => {
   const { alertId, alert } = req.body;
   let sql = "INSERT INTO medication_alerts (alert_id, alert) VALUES (?, ?)";
   sql = mysql.format(sql, [alertId, alert]);
-  pool.query(sql, (err, results) => {
+  pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
-    return res.json({ newMedId: results.insertId });
+    return res.json({ newAlertId: res.insertId });
   });
 };
 

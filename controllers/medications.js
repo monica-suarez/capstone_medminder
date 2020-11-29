@@ -42,7 +42,7 @@ const updateMedicationById = (req, res) => {
 
 const deleteMedicationById = (req, res) => {
   let sql = "DELETE FROM medications WHERE med_id = ?";
-  sql = mysql.format(sql, [req.params.medId]);
+  sql = mysql.format(sql, [req.params.id]);
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.json({
