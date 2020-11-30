@@ -1,7 +1,7 @@
 USE capstone_medminder;
 
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS users, medications, medication_dose;
+DROP TABLE IF EXISTS users, medications, medication_alerts, dose_log;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE users (
@@ -49,11 +49,25 @@ CREATE TABLE dose_log (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (medication_id) REFERENCES medications (med_id),
     FOREIGN KEY (medalert_id) REFERENCES medication_alerts (alert_id)
-)
+);
+
 
 INSERT INTO users (first_name, last_name, date_of_birth, email, username, password)
 VALUES ("Test", "User", "1111-11-11", "testuser@testing.com", "testusername", "testpassword" ),
 ("Test2", "User2", "1111-11-22", "testuser2@testing.com", "testusername2", "testpassword2" );
 
--- INSERT INTO medications (medication_name, user_id)
--- VALUES ("Metaformin")
+
+INSERT INTO medications (medication_name, user_id)
+VALUES ("Tylenol", (SELECT id FROM users WHERE id = 1));
+
+INSERT INTO medications (medication_name, user_id)
+VALUES ("Ibuprofen", (SELECT id FROM users WHERE id = 1));
+
+INSERT INTO medications (medication_name, user_id)
+VALUES ("Aleve", (SELECT id FROM users WHERE id = 2));
+
+INSERT INTO medication_alerts (alert, user_id, medication_id)
+VALUES("11:30:00", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medications WHERE med_id = 1));
+
+INSERT INTO dose_log (dose_time, user_id, medication_id, medalert_id)
+VALUES("12:01:00", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medications WHERE med_id = 1), (SELECT alert_id FROM medication_alerts WHERE alert_id = 1));

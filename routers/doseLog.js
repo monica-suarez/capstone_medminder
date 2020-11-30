@@ -6,6 +6,8 @@ router.get("/dose_log", doseLogController.getAllDoses);
 
 router.get("/dose_log/:dose_id", doseLogController.getDoseLogById);
 
+router.get("/dose_log/:dose_id", doseLogController.getDoseTimeById);
+
 router.post("/dose_log", doseLogController.createDoseLog);
 
 router.delete("/dose_log/:dose_id", doseLogController.deleteDoseLog);

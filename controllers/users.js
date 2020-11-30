@@ -19,6 +19,17 @@ const getUserById = (req, res) => {
   });
 };
 
+const login = (req, res) => {
+  const { username } = req.body;
+  let sql = "SELECT * FROM users WHERE username = ?";
+  sql = mysql.format(sql, [username]);
+
+  pool.query(sql, (err, res) => {
+    if (err) return handleSQLError(res, err);
+    return res.json({ message: `Login successful ${res.username}` });
+  });
+};
+
 const createUser = (req, res) => {
   const {
     firstName,
@@ -91,6 +102,7 @@ const deleteUserByUsername = (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
+  login,
   createUser,
   updateUserById,
   deleteUserByUsername,

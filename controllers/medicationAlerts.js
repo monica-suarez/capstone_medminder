@@ -18,6 +18,16 @@ const getMedAlertById = (req, res) => {
   });
 };
 
+getMedAlertTimeById = (req, res) => {
+  const { alert } = req.body;
+  let sql = "SELECT TIME_FORMAT(alert, %h %i %p) WHERE alert_id = ?";
+  sql = mysql.format(sql, alert);
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+};
+
 const createMedAlert = (req, res) => {
   const { alertId, alert } = req.body;
   let sql = "INSERT INTO medication_alerts (alert_id, alert) VALUES (?, ?)";
@@ -50,6 +60,7 @@ const deleteAlertById = (req, res) => {
 module.exports = {
   getAllMedAlerts,
   getMedAlertById,
+  getMedAlertTimeById,
   createMedAlert,
   updateMedAlertById,
   deleteAlertById,

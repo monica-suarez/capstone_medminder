@@ -20,10 +20,9 @@ const getMedicationById = (req, res) => {
 };
 
 const createMedication = (req, res) => {
-  const { medId, medicationName, userId } = req.body;
-  let sql =
-    "INSERT INTO medications (med_id, medication_name, user_id) VALUES (?,?,?) ";
-  sql = mysql.format(sql, [medId, medicationName, userId]);
+  const { medicationName } = req.body;
+  let sql = "INSERT INTO medications (medication_name) VALUES (?) ";
+  sql = mysql.format(sql, [medicationName]);
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
     return res.json({ newMedId: res.insertId });
