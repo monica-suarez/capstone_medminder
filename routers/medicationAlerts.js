@@ -6,7 +6,7 @@ router.get("/medication_alerts", alertController.getAllMedAlerts);
 
 router.get("/medication_alerts/:alert_id", alertController.getMedAlertById);
 
-router.get("medication_alerts/:alert_id", alertController.getMedAlertTimeById);
+router.get("/medication_alerts/:alert_id", alertController.getMedAlertTimeById);
 
 router.post("/medication_alerts", alertController.createMedAlert);
 

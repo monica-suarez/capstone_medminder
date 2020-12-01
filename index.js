@@ -9,12 +9,12 @@ const doseLogRouter = require("./routers/doseLog");
 const app = express();
 const port = process.env.PORT || 4007;
 
+// app.use(express.static("client/build"));
 app.use(bodyParser.json());
-app.use("/", usersRouter, medRouter);
-app.use("/medications", medRouter);
-app.use("/medicationAlerts", medAlertRouter);
-app.use("/doseLog", doseLogRouter);
-// app.use("/userLogin", loginRouter);
+app.use("/", usersRouter);
+app.use("/", medRouter);
+app.use("/", medAlertRouter);
+app.use("/", doseLogRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to our server!");

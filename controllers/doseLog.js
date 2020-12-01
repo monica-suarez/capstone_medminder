@@ -11,7 +11,7 @@ const getAllDoses = (req, res) => {
 
 const getDoseLogById = (req, res) => {
   let sql = "SELECT * FROM dose_log WHERE dose_id = ?";
-  sql = mysql.format(sql, [req.params.id]);
+  sql = mysql.format(sql, [req.params.dose_id]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);

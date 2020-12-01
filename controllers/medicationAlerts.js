@@ -11,7 +11,7 @@ const getAllMedAlerts = (req, res) => {
 
 const getMedAlertById = (req, res) => {
   let sql = "SELECT * FROM medication_alerts WHERE alert_id = ?";
-  sql = mysql.format(sql, [req.params.id]);
+  sql = mysql.format(sql, [req.params.alert_id]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
