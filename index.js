@@ -9,7 +9,7 @@ const doseLogRouter = require("./routers/doseLog");
 const app = express();
 const port = process.env.PORT || 4007;
 
-// app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 app.use(bodyParser.json());
 app.use("/", usersRouter);
 app.use("/", medRouter);

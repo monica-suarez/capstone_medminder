@@ -18,9 +18,10 @@ const getDoseLogById = (req, res) => {
   });
 };
 
-getDoseTimeById = (req, res) => {
+getDoseTimeByDoseTime = (req, res) => {
   const { doseTime } = req.body;
-  let sql = "SELECT TIME_FORMAT(dose_time, %h %i %p) WHERE dose_id = ?";
+  let sql =
+    "SELECT TIME_FORMAT(dose_time, %h %i %p) from dose_log WHERE dose_time = ?";
   sql = mysql.format(sql, doseTime);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
@@ -38,7 +39,7 @@ const createDoseLog = (req, res) => {
   });
 };
 
-const deleteDoseLog = (req, res) => {
+const deleteDoseLogById = (req, res) => {
   let sql = "DELETE FROM dose_log WHERE dose_id = ?";
   sql = mysql.format(sql, [req.params.doseId]);
   pool.query(sql, (err, res) => {
@@ -50,7 +51,7 @@ const deleteDoseLog = (req, res) => {
 module.exports = {
   getAllDoses,
   getDoseLogById,
-  getDoseTimeById,
+  getDoseTimeByDoseTime,
   createDoseLog,
-  deleteDoseLog,
+  deleteDoseLogById,
 };

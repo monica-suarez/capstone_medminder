@@ -64,7 +64,7 @@ VALUES ("Ibuprofen", (SELECT id FROM users WHERE id = 1));
 INSERT INTO medications (medication_name, user_id)
 VALUES ("Aleve", (SELECT id FROM users WHERE id = 2));
 
-INSERT INTO medication_alerts (alert, user_id, medication_id)
+INSERT INTO med_alerts (alert, user_id, medication_id)
 VALUES("11:30:00", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medications WHERE med_id = 1));
 INSERT INTO medication_alerts (alert, user_id, medication_id)
 VALUES("09:45:00", (SELECT id FROM users WHERE id = 1), (SELECT med_id FROM medications WHERE med_id = 2));

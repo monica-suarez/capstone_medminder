@@ -3,14 +3,14 @@ const pool = require("../sql/connection");
 const { handleSQLError } = require("../sql/error");
 
 const getAllMedAlerts = (req, res) => {
-  pool.query("SELECT * FROM medication_alerts", (err, rows) => {
+  pool.query("SELECT * FROM med_alerts", (err, rows) => {
     if (err) return handleSQLError(res, err);
     return res.json(rows);
   });
 };
 
 const getMedAlertById = (req, res) => {
-  let sql = "SELECT * FROM medication_alerts WHERE alert_id = ?";
+  let sql = "SELECT * FROM med_alerts WHERE alert_id = ?";
   sql = mysql.format(sql, [req.params.alert_id]);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
@@ -18,9 +18,10 @@ const getMedAlertById = (req, res) => {
   });
 };
 
-getMedAlertTimeById = (req, res) => {
+getMedAlertTimeByAlert = (req, res) => {
   const { alert } = req.body;
-  let sql = "SELECT TIME_FORMAT(alert, %h %i %p) WHERE alert_id = ?";
+  let sql =
+    "SELECT TIME_FORMAT(alert, %h %i %p) FROM med_alerts WHERE alert = ?";
   sql = mysql.format(sql, alert);
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
@@ -30,7 +31,7 @@ getMedAlertTimeById = (req, res) => {
 
 const createMedAlert = (req, res) => {
   const { alertId, alert } = req.body;
-  let sql = "INSERT INTO medication_alerts (alert_id, alert) VALUES (?, ?)";
+  let sql = "INSERT INTO med_alerts (alert_id, alert) VALUES (?, ?)";
   sql = mysql.format(sql, [alertId, alert]);
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
@@ -40,7 +41,7 @@ const createMedAlert = (req, res) => {
 
 const updateMedAlertById = (req, res) => {
   const { alert, alertId } = req.body;
-  let sql = "UPDATE medication_alerts SET alert = ? where alert_id = ?";
+  let sql = "UPDATE med_alerts SET alert = ? where alert_id = ?";
   sql = mysql.format(sql, [alert, alertId]);
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
@@ -49,7 +50,7 @@ const updateMedAlertById = (req, res) => {
 };
 
 const deleteAlertById = (req, res) => {
-  let sql = "DELETE FROM medication_alerts WHERE alert_id = ?";
+  let sql = "DELETE FROM med_alerts WHERE alert_id = ?";
   sql = mysql.format(sql, [req.params.alertId]);
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err);
@@ -60,7 +61,7 @@ const deleteAlertById = (req, res) => {
 module.exports = {
   getAllMedAlerts,
   getMedAlertById,
-  getMedAlertTimeById,
+  getMedAlertTimeByAlert,
   createMedAlert,
   updateMedAlertById,
   deleteAlertById,

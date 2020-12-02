@@ -2,16 +2,16 @@ const express = require("express");
 const alertController = require("../controllers/medicationAlerts");
 const router = express.Router();
 
-router.get("/medication_alerts", alertController.getAllMedAlerts);
+router.get("/med_alerts", alertController.getAllMedAlerts);
 
-router.get("/medication_alerts/:alert_id", alertController.getMedAlertById);
+router.get("/med_alerts/:alert_id", alertController.getMedAlertById);
 
-router.get("/medication_alerts/:alert_id", alertController.getMedAlertTimeById);
+router.get("/med_alerts/:alert_id", alertController.getMedAlertTimeByAlert);
 
-router.post("/medication_alerts", alertController.createMedAlert);
+router.post("/med_alerts", alertController.createMedAlert);
 
-router.put("/medication_alerts/:alert_id", alertController.updateMedAlertById);
+router.put("/med_alerts/:alert_id", alertController.updateMedAlertById);
 
-router.delete("/medication_alerts/:alert_id", alertController.deleteAlertById);
+router.delete("/med_alerts/:alert_id", alertController.deleteAlertById);
 
 module.exports = router;
