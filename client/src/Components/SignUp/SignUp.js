@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import AppDataService from "../../Services/AppServices";
 import Header from "../Header";
 import "./signup.css";
 
@@ -30,23 +31,28 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const [values, setValues] = useState({
+  const defaultUserState = {
     firstName: "",
-    middleName: "",
+    middleName: null,
     lastName: "",
-    dob: "",
+    dateOfBirth: "",
     email: "",
     phone: "",
     username: "",
     password: "",
     showPassword: false,
-  });
-  const handleChange = (prop) => (e) => {
-    setValues({ ...values, [prop]: e.target.value });
+  };
+
+  const [newUser, setNewUser] = useState(defaultUserState);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setNewUser({ ...newUser, showPassword: !newUser.showPassword });
   };
 
   const handleMouseDownPassword = (e) => {
@@ -56,6 +62,34 @@ const SignUp = () => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
+    var data = {
+      firstName: newUser.firstName,
+      middleName: newUser.middleName,
+      lastName: newUser.middleName,
+      dateOfBirth: newUser.dateOfBirth,
+      email: newUser.email,
+      phone: newUser.phone,
+      username: newUser.username,
+      password: newUser.password,
+    };
+    AppDataService.createUser(data)
+      .then((response) => {
+        setNewUser({
+          firstName: response.data.firstName,
+          middleName: response.data.middleName,
+          lastName: response.data.middleName,
+          dateOfBirth: response.data.dateOfBirth,
+          email: response.data.email,
+          phone: response.data.phone,
+          username: response.data.username,
+          password: response.data.password,
+        });
+        setSubmitted(true);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     window.location.replace("/");
   };
   return (
@@ -76,12 +110,18 @@ const SignUp = () => {
               id="firstName-input"
               label="First Name"
               type="firstName"
+              name="firstName"
+              value={newUser.firstName}
+              onChange={handleChange}
             />
             <br />
             <TextField
               id="middleName-input"
               label="Middle Name (optional)"
               type="middleName"
+              name="middleName"
+              value={newUser.middleName}
+              onChange={handleChange}
             />
             <br />
             <TextField
@@ -89,6 +129,9 @@ const SignUp = () => {
               id="lastName-input"
               label="Last Name"
               type="lastName"
+              name="lastName"
+              value={newUser.lastName}
+              onChange={handleChange}
             />
             <br />
             <TextField
@@ -96,17 +139,38 @@ const SignUp = () => {
               id="dob-input"
               label="DOB (ex. MM/DD/YYYY)"
               type="dob"
+              name="dateOfBirth"
+              value={newUser.dateOfBirth}
+              onChange={handleChange}
             />
             <br />
-            <TextField required id="email-input" label="Email" type="email" />
+            <TextField
+              required
+              id="email-input"
+              label="Email"
+              type="email"
+              name="email"
+              value={newUser.email}
+              onChange={handleChange}
+            />
             <br />
-            <TextField id="phone-input" label="Phone (optional)" type="phone" />
+            <TextField
+              id="phone-input"
+              label="Phone (optional)"
+              type="phone"
+              name="phone"
+              value={newUser.phone}
+              onChange={handleChange}
+            />
             <br />
             <TextField
               required
               id="username-input"
               label="Username"
               type="username"
+              name="username"
+              value={newUser.password}
+              onChange={handleChange}
             />
             <br />
             <FormControl
@@ -118,10 +182,11 @@ const SignUp = () => {
               </InputLabel>
               <Input
                 id="standard-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
+                type={newUser.showPassword ? "text" : "password"}
+                value={newUser.password}
                 onChange={handleChange("password")}
                 autoComplete="current-password"
+                name="password"
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -129,7 +194,11 @@ const SignUp = () => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {newUser.showPassword ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -157,3 +226,15 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+// const [values, setValues] = useState({
+//   firstName: "",
+//   middleName: "",
+//   lastName: "",
+//   dob: "",
+//   email: "",
+//   phone: "",
+//   username: "",
+//   password: "",
+//   showPassword: false,
+// });
