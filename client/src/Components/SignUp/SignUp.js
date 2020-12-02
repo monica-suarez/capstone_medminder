@@ -44,7 +44,7 @@ const SignUp = () => {
   };
 
   const [newUser, setNewUser] = useState(defaultUserState);
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,7 +84,7 @@ const SignUp = () => {
           username: response.data.username,
           password: response.data.password,
         });
-        setSubmitted(true);
+        // setSubmitted(true);
         console.log(response.data);
       })
       .catch((err) => {
