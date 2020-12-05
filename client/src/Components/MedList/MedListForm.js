@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Paper, TextField, CircularProgress } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
+import { Box, Paper } from "@material-ui/core";
 import Header from "../Header";
 import Dosage from "./Dosage";
 import "./medlist.css";
@@ -26,55 +25,29 @@ const MedListForm = () => {
   // const url =
   //   "https://api.fda.gov/drug/event.json?api_key=API_KEY&search=openfda.brand_name:";
   console.log(typeof API_KEY);
-
-  const [addDose, setAddDose] = useState([]);
-  const [removeDose, setRemoveDose] = useState([...addDose]);
-
-  const [open, setOpen] = useState(false);
-  const [options, setOptions] = useState([]);
-  const loading = open && options.length === 0;
-  // const [state, setState] = useState({
-  //   dosePerDay: "",
-  //   name: "",
+  // const [medications, setMedications] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [alertTime, setAlertTime] = useState("");
+  const [addDose, setAddDose] = useState(false);
+  const [removeDose, setRemoveDose] = useState(true);
+  // useEffect(() => {
+  //   fetch(
+  //     "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME"
+  //     // "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=amb&ef=DISPLAY_NAME"
+  //   )
+  //     .then((response) => response.json)
+  //     .then((data) => {
+  //       setMedications(data.results);
+  //     });
   // });
-
-  // const handleChange = (event) => {
-  //   const name = event.target.name;
-  //   setState({
-  //     ...state,
-  //     [name]: event.target.value,
-  //   });
+  // const handleUpdate = (e) => {
+  //   if (e.target.name === "search") {
+  //     setSearch(e.target.value);
+  //   }
+  //   if (e.target.name === "alertTime") {
+  //     setAlertTime(e.target.value);
+  //   }
   // };
-
-  useEffect(() => {
-    let active = true;
-
-    if (!loading) {
-      return undefined;
-    }
-
-    (async () => {
-      const response = await fetch(
-        "https://country.register.gov.uk/records.json?page-size=5000"
-      );
-
-      const countries = await response.json();
-
-      if (active) {
-        setOptions(Object.keys(countries).map((key) => countries[key].item[0]));
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
   return (
     <div>
       <header className="page-header">
@@ -90,46 +63,39 @@ const MedListForm = () => {
       >
         <Paper elevation={5} className="med-form">
           <form>
-            <Autocomplete
-              style={{ width: 300 }}
-              open={open}
-              onOpen={() => {
-                setOpen(true);
-              }}
-              onClose={() => {
-                setOpen(false);
-              }}
-              getOptionSelected={(option, value) => option.name === value.name}
-              getOptionLabel={(option) => option.name}
-              options={options}
-              loading={loading}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  className="medSearch"
-                  label="Search Medications"
-                  InputProps={{
-                    ...params.InputProps,
-                    endAdornment: (
-                      <React.Fragment>
-                        {loading ? (
-                          <CircularProgress color="inherit" size={20} />
-                        ) : null}
-                        {params.InputProps.endAdornment}
-                      </React.Fragment>
-                    ),
-                  }}
-                />
-              )}
+            <input
+              // value={search}
+              placeholder="Search Medications"
+              name="search"
+              // onChange={handleUpdate}
             />
             <Dosage
+              name="alertTime"
               addDose={addDose}
               handleAddDose={setAddDose}
               removeDose={removeDose}
               handleRemoveDose={setRemoveDose}
             />
-            <div>{addDose === true ? <Dosage /> : ""}</div>
-            <div>{removeDose === false ? <Dosage /> : ""}</div>
+            <div>
+              {addDose === true ? (
+                <Dosage
+                  addDose={addDose}
+                  handleAddDose={setAddDose}
+                  removeDose={removeDose}
+                  handleRemoveDose={setRemoveDose}
+                />
+              ) : null}
+            </div>
+            <div>
+              {removeDose === false ? (
+                <Dosage
+                  addDose={addDose}
+                  handleAddDose={setAddDose}
+                  removeDose={removeDose}
+                  handleRemoveDose={setRemoveDose}
+                />
+              ) : null}
+            </div>
             {/* <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="dosePerDay">Times Taken Per Day</InputLabel>
                 <Select

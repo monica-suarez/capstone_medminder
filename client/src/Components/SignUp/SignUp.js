@@ -33,7 +33,7 @@ const SignUp = () => {
   const classes = useStyles();
   const defaultUserState = {
     firstName: "",
-    middleName: null,
+    middleName: "",
     lastName: "",
     dateOfBirth: "",
     email: "",
@@ -60,7 +60,7 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    document.cookie = "loggedIn = true; max-age = 60*1000";
+    // document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
     var data = {
       firstName: newUser.firstName,
@@ -90,7 +90,7 @@ const SignUp = () => {
       .catch((err) => {
         console.log(err);
       });
-    window.location.replace("/");
+    window.location.replace("/login");
   };
   return (
     <div>
@@ -169,7 +169,7 @@ const SignUp = () => {
               label="Username"
               type="username"
               name="username"
-              value={newUser.password}
+              value={newUser.username}
               onChange={handleChange}
             />
             <br />
@@ -184,7 +184,7 @@ const SignUp = () => {
                 id="standard-adornment-password"
                 type={newUser.showPassword ? "text" : "password"}
                 value={newUser.password}
-                onChange={handleChange("password")}
+                onChange={handleChange}
                 autoComplete="current-password"
                 name="password"
                 endAdornment={
