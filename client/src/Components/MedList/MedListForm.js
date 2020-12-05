@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Paper } from "@material-ui/core";
 import Header from "../Header";
@@ -25,11 +25,24 @@ const MedListForm = () => {
   // const url =
   //   "https://api.fda.gov/drug/event.json?api_key=API_KEY&search=openfda.brand_name:";
   console.log(typeof API_KEY);
-  // const [medications, setMedications] = useState([]);
-  // const [search, setSearch] = useState("");
+  const [medications, setMedications] = useState([]);
+  const [search, setSearch] = useState("");
   // const [alertTime, setAlertTime] = useState("");
   const [addDose, setAddDose] = useState(false);
   const [removeDose, setRemoveDose] = useState(true);
+  const getMeds = async () => {
+    try {
+      const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${search}ef=DISPLAY_NAME`)
+      const data = await res
+      setMedications(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    getMeds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   // useEffect(() => {
   //   fetch(
   //     "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME"
@@ -40,14 +53,14 @@ const MedListForm = () => {
   //       setMedications(data.results);
   //     });
   // });
-  // const handleUpdate = (e) => {
-  //   if (e.target.name === "search") {
-  //     setSearch(e.target.value);
-  //   }
-  //   if (e.target.name === "alertTime") {
-  //     setAlertTime(e.target.value);
-  //   }
-  // };
+  const handleUpdate = (e) => {
+    if (e.target.name === "search") {
+      setSearch(e.target.value);
+    }
+    // if (e.target.name === "alertTime") {
+    //   setAlertTime(e.target.value);
+    // }
+  };
   return (
     <div>
       <header className="page-header">
@@ -64,10 +77,11 @@ const MedListForm = () => {
         <Paper elevation={5} className="med-form">
           <form>
             <input
-              // value={search}
+              type="text"
+              value={medications}
               placeholder="Search Medications"
               name="search"
-              // onChange={handleUpdate}
+              onChange={handleUpdate}
             />
             <Dosage
               name="alertTime"
