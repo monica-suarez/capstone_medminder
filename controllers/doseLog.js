@@ -34,8 +34,8 @@ const createDoseLog = (req, res) => {
   let sql = "INSERT INTO dose_log (dose_id, dose_time) VALUES (?, ?)";
   sql = mysql.format(sql, [doseId, doseTime]);
   pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(res, err);
-    return res.json({ newDoseId: res.insertId });
+    if (err) return handleSQLError(results, err);
+    return res.json({ newDoseId: results.insertId });
   });
 };
 
@@ -43,8 +43,8 @@ const deleteDoseLogById = (req, res) => {
   let sql = "DELETE FROM dose_log WHERE dose_id = ?";
   sql = mysql.format(sql, [req.params.doseId]);
   pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(res, err);
-    return res.json({ message: `Deleted ${res.affectedRows} dose(s)` });
+    if (err) return handleSQLError(results, err);
+    return res.json({ message: `Deleted ${results.affectedRows} dose(s)` });
   });
 };
 

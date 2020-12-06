@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import AppDataService from "../../Services/AppServices";
+// import AppDataService from "../../Services/AppServices";
 import Header from "../Header";
 import "./signup.css";
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignUp = (props) => {
   const classes = useStyles();
   const defaultUserState = {
     firstName: "",
@@ -40,19 +40,38 @@ const SignUp = () => {
     phone: "",
     username: "",
     password: "",
-    showPassword: false,
+    // showPassword: false,
   };
 
   const [newUser, setNewUser] = useState(defaultUserState);
-  // const [submitted, setSubmitted] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
+  const postNewUser = async () => {
+    const initResponse = await fetch("/users", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        newUser: newUser,
+      }),
+    });
+    const data = await initResponse.json();
+    console.log("Response", data);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
+    console.log(value);
   };
 
   const handleClickShowPassword = () => {
-    setNewUser({ ...newUser, showPassword: !newUser.showPassword });
+    setShowNewPassword({
+      ...showNewPassword,
+      showPassword: !newUser.showPassword,
+    });
   };
 
   const handleMouseDownPassword = (e) => {
@@ -60,37 +79,39 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    postNewUser();
     // document.cookie = "loggedIn = true; max-age = 60*1000";
-    // props.history.push("/");
-    var data = {
-      firstName: newUser.firstName,
-      middleName: newUser.middleName,
-      lastName: newUser.middleName,
-      dateOfBirth: newUser.dateOfBirth,
-      email: newUser.email,
-      phone: newUser.phone,
-      username: newUser.username,
-      password: newUser.password,
-    };
-    AppDataService.createUser(data)
-      .then((response) => {
-        setNewUser({
-          firstName: response.data.firstName,
-          middleName: response.data.middleName,
-          lastName: response.data.middleName,
-          dateOfBirth: response.data.dateOfBirth,
-          email: response.data.email,
-          phone: response.data.phone,
-          username: response.data.username,
-          password: response.data.password,
-        });
-        // setSubmitted(true);
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    window.location.replace("/login");
+    // // props.history.push("/");
+    // var data = {
+    //   firstName: newUser.firstName,
+    //   middleName: newUser.middleName,
+    //   lastName: newUser.middleName,
+    //   dateOfBirth: newUser.dateOfBirth,
+    //   email: newUser.email,
+    //   phone: newUser.phone,
+    //   username: newUser.username,
+    //   password: newUser.password,
+    // };
+    // AppDataService.createUser(data)
+    //   .then((response) => {
+    //     setNewUser({
+    //       firstName: response.data.firstName,
+    //       middleName: response.data.middleName,
+    //       lastName: response.data.middleName,
+    //       dateOfBirth: response.data.dateOfBirth,
+    //       email: response.data.email,
+    //       phone: response.data.phone,
+    //       username: response.data.username,
+    //       password: response.data.password,
+    //     });
+    //     // setSubmitted(true);
+    //     console.log(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // window.location.replace("/login");
+    // props.history.push("/PersonalInfo")
   };
   return (
     <div>

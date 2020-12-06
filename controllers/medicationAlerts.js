@@ -34,8 +34,8 @@ const createMedAlert = (req, res) => {
   let sql = "INSERT INTO med_alerts (alert_id, alert) VALUES (?, ?)";
   sql = mysql.format(sql, [alertId, alert]);
   pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(res, err);
-    return res.json({ newAlertId: res.insertId });
+    if (err) return handleSQLError(results, err);
+    return res.json({ newAlertId: results.insertId });
   });
 };
 
@@ -44,7 +44,7 @@ const updateMedAlertById = (req, res) => {
   let sql = "UPDATE med_alerts SET alert = ? where alert_id = ?";
   sql = mysql.format(sql, [alert, alertId]);
   pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(res, err);
+    if (err) return handleSQLError(results, err);
     return res.status(204).json();
   });
 };
@@ -53,8 +53,8 @@ const deleteAlertById = (req, res) => {
   let sql = "DELETE FROM med_alerts WHERE alert_id = ?";
   sql = mysql.format(sql, [req.params.alertId]);
   pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(res, err);
-    return res.json({ message: `Deleted ${res.affectedRows} alerts(s)` });
+    if (err) return handleSQLError(results, err);
+    return res.json({ message: `Deleted ${results.affectedRows} alerts(s)` });
   });
 };
 

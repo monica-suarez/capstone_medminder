@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import "./login.css";
+// import AppDataService from "../../Services/AppServices";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,11 +31,23 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = (props) => {
   const classes = useStyles();
+  // const [loginUser, setLoginUser] = useState([]);
   const [values, setValues] = useState({
     username: "",
     password: "",
     showPassword: false,
   });
+
+  // const checkUser = () => {
+  //   AppDataService.login()
+  //   .then(response => {
+  //     setLoginUser(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //   })
+  // }
+
   const handleChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
   };
@@ -50,7 +63,9 @@ const LoginPage = (props) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
-    window.location.replace("/");
+    // window.location.replace("/");
+    // checkUser();
+    // console.log(loginUser)
   };
 
   return (
@@ -119,3 +134,20 @@ const LoginPage = (props) => {
 };
 
 export default LoginPage;
+
+// useEffect(() => {
+//   callBackendAPI()
+//     .then((res) => setUsers(res))
+//     .catch((err) => console.log(err));
+// }, []);
+
+// // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+// const callBackendAPI = async () => {
+//   const response = await fetch("/users");
+//   const body = await response.json();
+
+//   if (response.status !== 200) {
+//     throw Error(body.message);
+//   }
+//   return body;
+// };
