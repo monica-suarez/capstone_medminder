@@ -26,16 +26,20 @@ const useStyles = makeStyles((theme) => ({
     textField: {
       width: "25ch",
     },
+    dob: {
+      width: "25ch",
+      color: "gray",
+    },
   },
 }));
 
 const SignUp = (props) => {
   const classes = useStyles();
   const defaultUserState = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    dateOfBirth: "",
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    date_of_birth: "",
     email: "",
     phone: "",
     username: "",
@@ -129,18 +133,18 @@ const SignUp = (props) => {
               required
               id="firstName-input"
               label="First Name"
-              type="firstName"
-              name="firstName"
-              value={newUser.firstName}
+              type="text"
+              name="first_name"
+              value={newUser.first_name}
               onChange={handleChange}
             />
             <br />
             <TextField
               id="middleName-input"
               label="Middle Name (optional)"
-              type="middleName"
-              name="middleName"
-              value={newUser.middleName}
+              type="text"
+              name="middle_name"
+              value={newUser.middle_name}
               onChange={handleChange}
             />
             <br />
@@ -148,19 +152,21 @@ const SignUp = (props) => {
               required
               id="lastName-input"
               label="Last Name"
-              type="lastName"
-              name="lastName"
-              value={newUser.lastName}
+              type="last_name"
+              name="last_name"
+              value={newUser.last_name}
               onChange={handleChange}
             />
             <br />
             <TextField
               required
+              style={{ paddingTop: "15px" }}
+              className={classes.dob}
               id="dob-input"
-              label="DOB (ex. MM/DD/YYYY)"
-              type="dob"
-              name="dateOfBirth"
-              value={newUser.dateOfBirth}
+              label=""
+              type="date"
+              name="date_of_birth"
+              value={newUser.date_of_birth}
               onChange={handleChange}
             />
             <br />

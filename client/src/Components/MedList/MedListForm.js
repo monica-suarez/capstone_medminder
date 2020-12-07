@@ -21,23 +21,20 @@ const useStyles = makeStyles((theme) => ({
 
 const MedListForm = () => {
   const classes = useStyles();
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  // const url =
-  //   "https://api.fda.gov/drug/event.json?api_key=API_KEY&search=openfda.brand_name:";
-  console.log(typeof API_KEY);
   const [medications, setMedications] = useState([]);
   const [search, setSearch] = useState("");
   // const [alertTime, setAlertTime] = useState("");
   const [addDose, setAddDose] = useState(false);
   const [removeDose, setRemoveDose] = useState(true);
   const getMeds = async () => {
+    const BASE_URL = `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME&terms=`;
+    const QUERY = `${search}`;
     try {
-      const res = await fetch(
-        `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${search}&ef=DISPLAY_NAME`
-      );
-      const data = await res;
+      const res = await fetch(BASE_URL + QUERY);
+      const meds = await res.json();
+      setMedications(meds);
+      console.log(meds);
       console.log(medications);
-      setMedications(data);
     } catch (error) {
       console.log(error);
     }
@@ -45,17 +42,7 @@ const MedListForm = () => {
   useEffect(() => {
     getMeds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
-  // useEffect(() => {
-  //   fetch(
-  //     "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME"
-  //     // "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=amb&ef=DISPLAY_NAME"
-  //   )
-  //     .then((response) => response.json)
-  //     .then((data) => {
-  //       setMedications(data.results);
-  //     });
-  // });
+  }, []);
   // const handleUpdate = (e) => {
   //   if (e.target.name === "search") {
   //     setSearch(e.target.value);
@@ -80,12 +67,10 @@ const MedListForm = () => {
         <Paper elevation={5} className="med-form">
           <form>
             <input
-              type="text"
-              value={search}
               placeholder="Search Medications"
-              name="search"
               // onChange={handleUpdate}
               onChange={(e) => setSearch(e.target.value)}
+              value={search}
             />
             {/* <ul>
               {medications}
