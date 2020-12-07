@@ -32,17 +32,20 @@ const MedListForm = () => {
   const [removeDose, setRemoveDose] = useState(true);
   const getMeds = async () => {
     try {
-      const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${search}ef=DISPLAY_NAME`)
-      const data = await res
-      setMedications(data)
+      const res = await fetch(
+        `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${search}&ef=DISPLAY_NAME`
+      );
+      const data = await res;
+      console.log(medications);
+      setMedications(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
     getMeds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [search]);
   // useEffect(() => {
   //   fetch(
   //     "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME"
@@ -53,14 +56,14 @@ const MedListForm = () => {
   //       setMedications(data.results);
   //     });
   // });
-  const handleUpdate = (e) => {
-    if (e.target.name === "search") {
-      setSearch(e.target.value);
-    }
-    // if (e.target.name === "alertTime") {
-    //   setAlertTime(e.target.value);
-    // }
-  };
+  // const handleUpdate = (e) => {
+  //   if (e.target.name === "search") {
+  //     setSearch(e.target.value);
+  //   }
+  //   // if (e.target.name === "alertTime") {
+  //   //   setAlertTime(e.target.value);
+  //   // }
+  // };
   return (
     <div>
       <header className="page-header">
@@ -78,11 +81,15 @@ const MedListForm = () => {
           <form>
             <input
               type="text"
-              value={medications}
+              value={search}
               placeholder="Search Medications"
               name="search"
-              onChange={handleUpdate}
+              // onChange={handleUpdate}
+              onChange={(e) => setSearch(e.target.value)}
             />
+            {/* <ul>
+              {medications}
+            </ul> */}
             <Dosage
               name="alertTime"
               addDose={addDose}

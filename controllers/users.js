@@ -32,10 +32,10 @@ const login = (req, res) => {
 
 const createUser = (req, res) => {
   const {
-    firstName,
-    middleName,
-    lastName,
-    dateOfBirth,
+    first_name,
+    middle_name,
+    last_name,
+    date_of_birth,
     email,
     phone,
     username,
@@ -44,10 +44,10 @@ const createUser = (req, res) => {
   let sql =
     "INSERT INTO users (first_name, middle_name, last_name, date_of_birth, email, phone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   sql = mysql.format(sql, [
-    firstName,
-    middleName,
-    lastName,
-    dateOfBirth,
+    first_name,
+    middle_name,
+    last_name,
+    date_of_birth,
     email,
     phone,
     username,

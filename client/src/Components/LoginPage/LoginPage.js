@@ -63,7 +63,7 @@ const LoginPage = (props) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
-    // window.location.replace("/");
+    window.location.replace("/");
     // checkUser();
     // console.log(loginUser)
   };

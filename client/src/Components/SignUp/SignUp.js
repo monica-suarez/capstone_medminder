@@ -40,7 +40,6 @@ const SignUp = (props) => {
     phone: "",
     username: "",
     password: "",
-    // showPassword: false,
   };
 
   const [newUser, setNewUser] = useState(defaultUserState);
