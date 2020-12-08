@@ -65,6 +65,7 @@ const SignUp = (props) => {
         console.log(response.data);
       })
       .catch((error) => {
+        window.alert("Username already exists");
         console.log(error);
       });
   };
