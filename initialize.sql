@@ -42,6 +42,7 @@ CREATE TABLE medication_alerts (
 CREATE TABLE dose_log (
     dose_id INT NOT NULL AUTO_INCREMENT,
     dose_time TIME NOT NULL,
+    dose_date DATE NOT NULL, 
     user_id INT NOT NULL, 
     medication_id INT NOT NULL,
     medalert_id INT NOT NULL, 
@@ -69,7 +70,7 @@ VALUES("11:30:00", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medi
 INSERT INTO medication_alerts (alert, user_id, medication_id)
 VALUES("09:45:00", (SELECT id FROM users WHERE id = 1), (SELECT med_id FROM medications WHERE med_id = 2));
 
-INSERT INTO dose_log (dose_time, user_id, medication_id, medalert_id)
-VALUES("12:15:00", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medications WHERE med_id = 1), (SELECT alert_id FROM medication_alerts WHERE alert_id = 1));
-INSERT INTO dose_log (dose_time, user_id, medication_id, medalert_id)
-VALUES("10:27:00", (SELECT id FROM users WHERE id = 1), (SELECT med_id FROM medications WHERE med_id = 2), (SELECT alert_id FROM medication_alerts WHERE alert_id = 1));
+INSERT INTO dose_log (dose_time, dose_date, user_id, medication_id, medalert_id)
+VALUES("12:15:00", "2020-11-04", (SELECT id FROM users WHERE id = 2), (SELECT med_id FROM medications WHERE med_id = 1), (SELECT alert_id FROM medication_alerts WHERE alert_id = 1));
+INSERT INTO dose_log (dose_time, dose_date, user_id, medication_id, medalert_id)
+VALUES("10:27:00", "2020-12-01", (SELECT id FROM users WHERE id = 1), (SELECT med_id FROM medications WHERE med_id = 2), (SELECT alert_id FROM medication_alerts WHERE alert_id = 1));

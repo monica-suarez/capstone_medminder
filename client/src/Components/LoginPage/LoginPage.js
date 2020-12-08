@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import "./login.css";
+// import axios from "axios";
 // import AppDataService from "../../Services/AppServices";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,29 +32,25 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = (props) => {
   const classes = useStyles();
-  // const [loginUser, setLoginUser] = useState([]);
-  const [values, setValues] = useState({
+  const defaultUserState = {
     username: "",
     password: "",
     showPassword: false,
-  });
+  };
+  // const [user, setUser] = useState([]);
+  const [loginUser, setLoginUser] = useState(defaultUserState);
 
-  // const checkUser = () => {
-  //   AppDataService.login()
-  //   .then(response => {
-  //     setLoginUser(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //   })
+  // const getUser = async () => {
+  //   const result = await Axios.get('/users/:username', loginUser)
+  //   .then()
   // }
 
   const handleChange = (prop) => (e) => {
-    setValues({ ...values, [prop]: e.target.value });
+    setLoginUser({ ...loginUser, [prop]: e.target.value });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setLoginUser({ ...loginUser, showPassword: !loginUser.showPassword });
   };
 
   const handleMouseDownPassword = (e) => {
@@ -63,8 +60,7 @@ const LoginPage = (props) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
-    window.location.replace("/");
-    // checkUser();
+    // window.location.replace("/");
     // console.log(loginUser)
   };
 
@@ -91,8 +87,8 @@ const LoginPage = (props) => {
               </InputLabel>
               <Input
                 id="standard-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
+                type={loginUser.showPassword ? "text" : "password"}
+                value={loginUser.password}
                 onChange={handleChange("password")}
                 autoComplete="current-password"
                 endAdornment={
@@ -102,7 +98,11 @@ const LoginPage = (props) => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {loginUser.showPassword ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }

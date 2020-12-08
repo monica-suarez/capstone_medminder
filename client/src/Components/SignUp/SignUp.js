@@ -48,14 +48,7 @@ const SignUp = (props) => {
     showPassword: false,
   };
 
-  // const defaultNewPasswordState = {
-  //   showPassword: false,
-  // };
-
   const [newUser, setNewUser] = useState(defaultUserState);
-  // const [showNewPassword, setShowNewPassword] = useState(
-  //   defaultNewPasswordState
-  // );
 
   const postNewUser = () => {
     axios
@@ -91,7 +84,7 @@ const SignUp = (props) => {
     e.preventDefault();
     postNewUser(newUser);
     setNewUser(defaultUserState);
-    // console.log(newUser);
+    window.location.replace("/login");
   };
   return (
     <div>
@@ -229,47 +222,3 @@ const SignUp = (props) => {
 };
 
 export default SignUp;
-
-// const [values, setValues] = useState({
-//   firstName: "",
-//   middleName: "",
-//   lastName: "",
-//   dob: "",
-//   email: "",
-//   phone: "",
-//   username: "",
-//   password: "",
-//   showPassword: false,
-// });
-// document.cookie = "loggedIn = true; max-age = 60*1000";
-// // props.history.push("/");
-// var data = {
-//   firstName: newUser.firstName,
-//   middleName: newUser.middleName,
-//   lastName: newUser.middleName,
-//   dateOfBirth: newUser.dateOfBirth,
-//   email: newUser.email,
-//   phone: newUser.phone,
-//   username: newUser.username,
-//   password: newUser.password,
-// };
-// AppDataService.createUser(data)
-//   .then((response) => {
-//     setNewUser({
-//       firstName: response.data.firstName,
-//       middleName: response.data.middleName,
-//       lastName: response.data.middleName,
-//       dateOfBirth: response.data.dateOfBirth,
-//       email: response.data.email,
-//       phone: response.data.phone,
-//       username: response.data.username,
-//       password: response.data.password,
-//     });
-//     // setSubmitted(true);
-//     console.log(response.data);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-// window.location.replace("/login");
-// props.history.push("/PersonalInfo")

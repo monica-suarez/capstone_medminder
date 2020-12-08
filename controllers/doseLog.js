@@ -30,9 +30,10 @@ getDoseTimeByDoseTime = (req, res) => {
 };
 
 const createDoseLog = (req, res) => {
-  const { doseId, doseTime } = req.body;
-  let sql = "INSERT INTO dose_log (dose_id, dose_time) VALUES (?, ?)";
-  sql = mysql.format(sql, [doseId, doseTime]);
+  const { doseId, doseTime, doseDate } = req.body;
+  let sql =
+    "INSERT INTO dose_log, dose_time (dose_id, dose_time) VALUES (?, ?)";
+  sql = mysql.format(sql, [doseId, doseTime, doseDate]);
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(results, err);
     return res.json({ newDoseId: results.insertId });
