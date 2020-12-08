@@ -45,10 +45,17 @@ const SignUp = (props) => {
     phone: "",
     username: "",
     password: "",
+    showPassword: false,
   };
 
+  // const defaultNewPasswordState = {
+  //   showPassword: false,
+  // };
+
   const [newUser, setNewUser] = useState(defaultUserState);
-  const [showNewPassword, setShowNewPassword] = useState(false);
+  // const [showNewPassword, setShowNewPassword] = useState(
+  //   defaultNewPasswordState
+  // );
 
   const postNewUser = () => {
     axios
@@ -69,11 +76,11 @@ const SignUp = (props) => {
   };
 
   const handleClickShowPassword = () => {
-    setShowNewPassword({
-      ...showNewPassword,
-      showNewPassword: !newUser.showNewPassword,
+    setNewUser({
+      ...newUser,
+      showPassword: !newUser.showPassword,
     });
-    console.log(showNewPassword);
+    // console.log(showNewPassword);
   };
 
   const handleMouseDownPassword = (e) => {
