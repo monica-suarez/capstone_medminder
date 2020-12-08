@@ -60,7 +60,7 @@ const LoginPage = (props) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     // props.history.push("/");
-    // window.location.replace("/");
+    window.location.replace("/");
     // console.log(loginUser)
   };
 
@@ -134,20 +134,3 @@ const LoginPage = (props) => {
 };
 
 export default LoginPage;
-
-// useEffect(() => {
-//   callBackendAPI()
-//     .then((res) => setUsers(res))
-//     .catch((err) => console.log(err));
-// }, []);
-
-// // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-// const callBackendAPI = async () => {
-//   const response = await fetch("/users");
-//   const body = await response.json();
-
-//   if (response.status !== 200) {
-//     throw Error(body.message);
-//   }
-//   return body;
-// };
