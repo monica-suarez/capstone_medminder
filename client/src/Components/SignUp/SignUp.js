@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -49,19 +50,16 @@ const SignUp = (props) => {
   const [newUser, setNewUser] = useState(defaultUserState);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
-  const postNewUser = async () => {
-    const initResponse = await fetch("/users", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        newUser: newUser,
-      }),
-    });
-    const data = await initResponse.json();
-    console.log("Response", data);
+  const postNewUser = () => {
+    axios
+      .post("/users", newUser)
+      .then((response) => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleChange = (e) => {
@@ -73,8 +71,9 @@ const SignUp = (props) => {
   const handleClickShowPassword = () => {
     setShowNewPassword({
       ...showNewPassword,
-      showPassword: !newUser.showPassword,
+      showNewPassword: !newUser.showNewPassword,
     });
+    console.log(showNewPassword);
   };
 
   const handleMouseDownPassword = (e) => {
@@ -82,39 +81,9 @@ const SignUp = (props) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    postNewUser();
-    // document.cookie = "loggedIn = true; max-age = 60*1000";
-    // // props.history.push("/");
-    // var data = {
-    //   firstName: newUser.firstName,
-    //   middleName: newUser.middleName,
-    //   lastName: newUser.middleName,
-    //   dateOfBirth: newUser.dateOfBirth,
-    //   email: newUser.email,
-    //   phone: newUser.phone,
-    //   username: newUser.username,
-    //   password: newUser.password,
-    // };
-    // AppDataService.createUser(data)
-    //   .then((response) => {
-    //     setNewUser({
-    //       firstName: response.data.firstName,
-    //       middleName: response.data.middleName,
-    //       lastName: response.data.middleName,
-    //       dateOfBirth: response.data.dateOfBirth,
-    //       email: response.data.email,
-    //       phone: response.data.phone,
-    //       username: response.data.username,
-    //       password: response.data.password,
-    //     });
-    //     // setSubmitted(true);
-    //     console.log(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // window.location.replace("/login");
-    // props.history.push("/PersonalInfo")
+    postNewUser(newUser);
+    setNewUser(defaultUserState);
+    // console.log(newUser);
   };
   return (
     <div>
@@ -264,3 +233,35 @@ export default SignUp;
 //   password: "",
 //   showPassword: false,
 // });
+// document.cookie = "loggedIn = true; max-age = 60*1000";
+// // props.history.push("/");
+// var data = {
+//   firstName: newUser.firstName,
+//   middleName: newUser.middleName,
+//   lastName: newUser.middleName,
+//   dateOfBirth: newUser.dateOfBirth,
+//   email: newUser.email,
+//   phone: newUser.phone,
+//   username: newUser.username,
+//   password: newUser.password,
+// };
+// AppDataService.createUser(data)
+//   .then((response) => {
+//     setNewUser({
+//       firstName: response.data.firstName,
+//       middleName: response.data.middleName,
+//       lastName: response.data.middleName,
+//       dateOfBirth: response.data.dateOfBirth,
+//       email: response.data.email,
+//       phone: response.data.phone,
+//       username: response.data.username,
+//       password: response.data.password,
+//     });
+//     // setSubmitted(true);
+//     console.log(response.data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// window.location.replace("/login");
+// props.history.push("/PersonalInfo")
