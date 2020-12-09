@@ -60,6 +60,9 @@ const SignUp = (props) => {
       .catch((error) => {
         window.alert("Username already exists");
         console.log(error);
+        if (!error) {
+          window.location.replace("/login");
+        }
       });
   };
 
@@ -150,7 +153,7 @@ const SignUp = (props) => {
               onChange={handleChange}
             />
             <br />
-            <TextField
+            {/* <TextField
               id="phone-input"
               label="Phone (optional)"
               type="phone"
@@ -158,7 +161,7 @@ const SignUp = (props) => {
               value={newUser.phone}
               onChange={handleChange}
             />
-            <br />
+            <br /> */}
             <TextField
               required
               id="username-input"

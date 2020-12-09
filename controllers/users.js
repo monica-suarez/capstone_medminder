@@ -22,7 +22,7 @@ const getUserById = (req, res) => {
 // const login = (req, res) => {
 //   const { username } = req.body;
 //   let sql = "SELECT * FROM users WHERE username = ?";
-//   sql = mysql.format(sql, [username]);
+//   sql = mysql.format(sql, [req.params.username]);
 
 //   pool.query(sql, (err, res) => {
 //     if (err) return handleSQLError(results, err);

@@ -14,9 +14,9 @@ app.use(express.static("client/build"));
 app.use(bodyParser.json());
 app.use("/users", usersRouter);
 app.use("/medications", medRouter);
-app.use("/med_alerts", medAlertRouter);
+app.use("/medication_alerts", medAlertRouter);
 app.use("/dose_log", doseLogRouter);
-// app.use("/users", userLoginRouter);
+// app.use("/login", userLoginRouter);
 
 // app.get("/allow-cors", { mode: "cors" }, (req, res) => {
 //   res.send("Welcome to our server!");

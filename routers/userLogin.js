@@ -2,7 +2,7 @@
 // const userLoginController = require("../controllers/userLogin");
 // const router = express.Router();
 
-// router.get("/:username", userLoginController.login);
+// router.post("/:username", userLoginController.login);
 
 // module.export = {
 //   router,
