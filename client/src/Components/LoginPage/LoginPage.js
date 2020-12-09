@@ -41,8 +41,8 @@ const LoginPage = (props) => {
   const [loginUser, setLoginUser] = useState(defaultUserState);
 
   // const getUser = async () => {
-  //   const result = await Axios.get('/users/:username', loginUser)
-  //   .then()
+  //   const reponse = await Axios.get('/users/:username', loginUser)
+  //   .then(response => response.json())
   // }
 
   const handleChange = (prop) => (e) => {

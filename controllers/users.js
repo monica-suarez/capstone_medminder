@@ -26,7 +26,7 @@ const login = (req, res) => {
 
   pool.query(sql, (err, res) => {
     if (err) return handleSQLError(results, err);
-    return res.json({ message: `Login successful ${results.username}` });
+    return res.json(rows);
   });
 };
 

@@ -84,7 +84,7 @@ const SignUp = (props) => {
     e.preventDefault();
     postNewUser(newUser);
     setNewUser(defaultUserState);
-    window.location.replace("/login");
+    // window.location.replace("/login");
   };
   return (
     <div>

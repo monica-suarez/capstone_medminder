@@ -23,18 +23,19 @@ const MedListForm = () => {
   const classes = useStyles();
   const [medications, setMedications] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectMed, setSelectMed] = useState("");
   // const [alertTime, setAlertTime] = useState("");
-  const [addDose, setAddDose] = useState(false);
-  const [removeDose, setRemoveDose] = useState(true);
+  // const [addDose, setAddDose] = useState(false);
+  // const [removeDose, setRemoveDose] = useState(true);
+
   const getMeds = async () => {
     const BASE_URL = `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=DISPLAY_NAME&terms=`;
     const QUERY = `${search}`;
     try {
       const res = await fetch(BASE_URL + QUERY);
       const meds = await res.json();
-      setMedications(meds);
-      console.log(meds);
-      console.log(medications);
+      setMedications(meds[1]);
+      console.log(search);
     } catch (error) {
       console.log(error);
     }
@@ -42,15 +43,15 @@ const MedListForm = () => {
   useEffect(() => {
     getMeds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // const handleUpdate = (e) => {
-  //   if (e.target.name === "search") {
-  //     setSearch(e.target.value);
-  //   }
-  //   // if (e.target.name === "alertTime") {
-  //   //   setAlertTime(e.target.value);
-  //   // }
-  // };
+  }, [search]);
+  const handleUpdate = (e) => {
+    if (e.target.name === "search") {
+      setSearch(e.target.value);
+    }
+    // if (e.target.name === "alertTime") {
+    //   setAlertTime(e.target.value);
+    // }
+  };
   return (
     <div>
       <header className="page-header">
@@ -67,22 +68,41 @@ const MedListForm = () => {
         <Paper elevation={5} className="med-form">
           <form>
             <input
-              placeholder="Search Medications"
-              // onChange={handleUpdate}
-              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              placeholder="Find Your Medication"
+              onChange={handleUpdate}
               value={search}
             />
-            {/* <ul>
-              {medications}
-            </ul> */}
+            <div>
+              {search &&
+                medications
+                  .filter((medication) =>
+                    medication.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((medication, idx) => (
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        let med = medications.splice(idx, 1).toString();
+                        console.log(med);
+                        setSelectMed(med);
+                        setSearch(selectMed);
+                      }}
+                      value={selectMed}
+                      key={idx}
+                    >
+                      {medication}
+                    </div>
+                  ))}
+            </div>
             <Dosage
               name="alertTime"
-              addDose={addDose}
-              handleAddDose={setAddDose}
-              removeDose={removeDose}
-              handleRemoveDose={setRemoveDose}
+              // addDose={addDose}
+              // handleAddDose={setAddDose}
+              // removeDose={removeDose}
+              // handleRemoveDose={setRemoveDose}
             />
-            <div>
+            {/* <div>
               {addDose === true ? (
                 <Dosage
                   addDose={addDose}
@@ -101,7 +121,7 @@ const MedListForm = () => {
                   handleRemoveDose={setRemoveDose}
                 />
               ) : null}
-            </div>
+            </div> */}
             {/* <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="dosePerDay">Times Taken Per Day</InputLabel>
                 <Select
