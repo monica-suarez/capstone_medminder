@@ -1,18 +1,18 @@
 const express = require("express");
 const usersController = require("../controllers/users");
 // const { authenticate } = require('../middleware');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.get("/users", usersController.getAllUsers);
+router.get("/", usersController.getAllUsers);
 
-router.get("/users/:id", usersController.getUserById);
+router.get("/:id", usersController.getUserById);
 
-router.get("users/:username", usersController.login);
+// router.get("/:username", usersController.login);
 
-router.post("/users", usersController.createUser);
+router.post("/", usersController.createUser);
 
-router.put("/users/:id", usersController.updateUserById);
+router.put("/:id", usersController.updateUserById);
 
-router.delete("/users/:username", usersController.deleteUserByUsername);
+router.delete("/:username", usersController.deleteUserByUsername);
 
 module.exports = router;

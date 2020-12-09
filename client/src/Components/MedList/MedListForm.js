@@ -124,28 +124,6 @@ const MedListForm = () => {
                 />
               ) : null}
             </div> */}
-            {/* <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="dosePerDay">Times Taken Per Day</InputLabel>
-                <Select
-                  native
-                  className="dose-select"
-                  value={state.dosePerDay}
-                  onChange={handleChange}
-                  label="Times"
-                  inputProps={{
-                    name: "dosePerDay",
-                    id: "dosage",
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                </Select>
-              </FormControl> */}
           </form>
         </Paper>
       </Box>

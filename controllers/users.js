@@ -19,16 +19,16 @@ const getUserById = (req, res) => {
   });
 };
 
-const login = (req, res) => {
-  const { username } = req.body;
-  let sql = "SELECT * FROM users WHERE username = ?";
-  sql = mysql.format(sql, [username]);
+// const login = (req, res) => {
+//   const { username } = req.body;
+//   let sql = "SELECT * FROM users WHERE username = ?";
+//   sql = mysql.format(sql, [username]);
 
-  pool.query(sql, (err, res) => {
-    if (err) return handleSQLError(results, err);
-    return res.json(rows);
-  });
-};
+//   pool.query(sql, (err, res) => {
+//     if (err) return handleSQLError(results, err);
+//     return res.json({ message: `Login successful ${results.username}` });
+//   });
+// };
 
 const createUser = (req, res) => {
   const {
@@ -103,7 +103,7 @@ const deleteUserByUsername = (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
-  login,
+  // login,
   createUser,
   updateUserById,
   deleteUserByUsername,
