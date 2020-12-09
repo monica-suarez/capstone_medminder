@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Box } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+// import AddCircleIcon from "@material-ui/icons/AddCircle";
+// import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import "./medlist.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     backgroundColor: "red",
   },
-  addIcon: {
-    paddingLeft: 20,
-    cursor: "pointer",
-    transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;",
-  },
+  // addIcon: {
+  //   paddingLeft: 20,
+  //   cursor: "pointer",
+  //   transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;",
+  // },
 }));
 
 const Dosage = (props) => {
   const classes = useStyles();
-  const handleAdd = (e) => {
-    e.preventDefault();
-    props.handleAddDose(!props.addDose);
-  };
-  const handleRemove = (e) => {
-    e.preventDefault();
-    props.handleRemoveDose(!props.removeDose);
-  };
+  // const handleAdd = (e) => {
+  //   e.preventDefault();
+  //   props.handleAddDose(!props.addDose);
+  // };
+  // const handleRemove = (e) => {
+  //   e.preventDefault();
+  //   props.handleRemoveDose(!props.removeDose);
+  // };
   return (
     <div className={classes.alertBody}>
       <label className={classes.alertLabel} htmlFor="doseTime">
@@ -82,7 +82,7 @@ const Dosage = (props) => {
                 step: 300, // 5 min
               }}
             />
-            <AddCircleIcon
+            {/* <AddCircleIcon
               className={classes.addIcon}
               id="add-alert"
               color="secondary"
@@ -95,7 +95,7 @@ const Dosage = (props) => {
               id="remove-alert"
               alt="remove alert time"
               onClick={handleRemove}
-            />
+            /> */}
           </Box>
         </div>
       </div>

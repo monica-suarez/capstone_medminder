@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Paper } from "@material-ui/core";
+import { Box, Paper, Input } from "@material-ui/core";
 import Header from "../Header";
 import Dosage from "./Dosage";
 import "./medlist.css";
@@ -10,12 +10,13 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTextField-root": {
       width: "38ch",
     },
-    textField: {
-      width: "25ch",
-    },
+    // textField: {
+    //   width: "38ch",
+    // },
   },
   formControl: {
-    minWidth: "30ch",
+    // minWidth: "30ch",
+    minWidth: "25ch",
   },
 }));
 
@@ -44,10 +45,10 @@ const MedListForm = () => {
     getMeds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
+
   const handleUpdate = (e) => {
-    if (e.target.name === "search") {
-      setSearch(e.target.value);
-    }
+    setSearch(e.target.value);
+
     // if (e.target.name === "alertTime") {
     //   setAlertTime(e.target.value);
     // }
@@ -67,13 +68,14 @@ const MedListForm = () => {
       >
         <Paper elevation={5} className="med-form">
           <form>
-            <input
+            <Input
               type="text"
               placeholder="Find Your Medication"
               onChange={handleUpdate}
               value={search}
+              style={{ width: "35ch" }}
             />
-            <div>
+            <Paper elevation={8}>
               {search &&
                 medications
                   .filter((medication) =>
@@ -94,7 +96,7 @@ const MedListForm = () => {
                       {medication}
                     </div>
                   ))}
-            </div>
+            </Paper>
             <Dosage
               name="alertTime"
               // addDose={addDose}
