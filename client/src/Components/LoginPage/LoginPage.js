@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,7 +16,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import "./login.css";
-// import axios from "axios";
+import axios from "axios";
 // import AppDataService from "../../Services/AppServices";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,16 +37,27 @@ const LoginPage = (props) => {
     password: "",
     showPassword: false,
   };
-  // const [user, setUser] = useState([]);
   const [loginUser, setLoginUser] = useState(defaultUserState);
+  const [users, setUsers] = useState([]);
 
-  // const getUser = async () => {
-  //   const reponse = await Axios.get('/users/:username', loginUser)
-  //   .then(response => response.json())
-  // }
+  console.log(users);
 
-  const handleChange = (prop) => (e) => {
-    setLoginUser({ ...loginUser, [prop]: e.target.value });
+  const getUsers = () => {
+    axios
+      .get("/users")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginUser({ ...loginUser, [name]: value });
+    console.log(value);
   };
 
   const handleClickShowPassword = () => {
@@ -76,9 +87,12 @@ const LoginPage = (props) => {
         <Paper elevation={5} className="login-form">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
+              name="username"
+              onChange={handleChange}
               id="standard-username-input"
               label="Username"
               type="username"
+              value={loginUser.username}
             />
             <br />
             <FormControl className={clsx(classes.margin, classes.textField)}>
@@ -86,10 +100,12 @@ const LoginPage = (props) => {
                 Password
               </InputLabel>
               <Input
+                name="password"
+                onChange={handleChange}
                 id="standard-adornment-password"
                 type={loginUser.showPassword ? "text" : "password"}
                 value={loginUser.password}
-                onChange={handleChange("password")}
+                // onChange={handleChange("password")}
                 autoComplete="current-password"
                 endAdornment={
                   <InputAdornment position="end">
