@@ -43,6 +43,7 @@ const MedListForm = () => {
   };
   useEffect(() => {
     getMeds();
+    console.log(selectMed);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 

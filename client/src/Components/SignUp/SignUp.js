@@ -60,9 +60,7 @@ const SignUp = (props) => {
       .catch((error) => {
         window.alert("Username already exists");
         console.log(error);
-        if (!error) {
-          window.location.replace("/login");
-        }
+        !error && window.location.replace("/login");
       });
   };
 
