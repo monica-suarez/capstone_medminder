@@ -26,7 +26,7 @@ const MedListForm = () => {
   const [search, setSearch] = useState("");
   const [selectMed, setSelectMed] = useState("");
   const [medResults, setMedResults] = useState([]);
-  const [clearOptions, setClearOptions] = useState(false);
+  const [toggle, setToggle] = useState(false);
   // const [alertTime, setAlertTime] = useState("");
   // const [addDose, setAddDose] = useState(false);
   // const [removeDose, setRemoveDose] = useState(true);
@@ -42,12 +42,17 @@ const MedListForm = () => {
         medication.toLowerCase().includes(search.toLowerCase())
       );
       setMedResults(dataResult);
+      // console.log(medResults);
+      // console.log(search);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getMeds();
+    // console.log(selectMed);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
@@ -59,18 +64,17 @@ const MedListForm = () => {
     // }
   };
 
-  const handleClick = (e, idx) => {
-    e.preventDefault();
+  const handleClick = (idx) => {
+    // e.preventDefault();
     let med = medications.splice(idx, 1).toString();
     console.log(med);
     setSelectMed(med);
-    console.log(clearOptions);
     handleToggle();
     // setSearch(selectMed);
   };
 
   const handleToggle = () => {
-    setClearOptions(!clearOptions);
+    setToggle(!toggle);
   };
 
   return (
@@ -96,21 +100,21 @@ const MedListForm = () => {
               value={!selectMed ? search : selectMed}
               style={{ width: "35ch" }}
             />
-            {handleToggle ? (
+            {!toggle && (
               <Paper elevation={8}>
                 {search &&
                   medResults.map((medication, idx) => (
                     <div
                       className="med-select"
-                      onClick={handleClick}
+                      onClick={() => handleClick(idx)}
                       value={selectMed}
-                      key={idx}
+                      key={medication}
                     >
                       {medication}
                     </div>
                   ))}
               </Paper>
-            ) : null}
+            )}
             <Dosage
               name="alertTime"
               // addDose={addDose}
