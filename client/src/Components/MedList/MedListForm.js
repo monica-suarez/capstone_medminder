@@ -25,6 +25,8 @@ const MedListForm = () => {
   const [medications, setMedications] = useState([]);
   const [search, setSearch] = useState("");
   const [selectMed, setSelectMed] = useState("");
+  const [medResults, setMedResults] = useState([]);
+  const [clearOptions, setClearOptions] = useState(false);
   // const [alertTime, setAlertTime] = useState("");
   // const [addDose, setAddDose] = useState(false);
   // const [removeDose, setRemoveDose] = useState(true);
@@ -36,24 +38,41 @@ const MedListForm = () => {
       const res = await fetch(BASE_URL + QUERY);
       const meds = await res.json();
       setMedications(meds[1]);
-      console.log(search);
+      const dataResult = medications.filter((medication) =>
+        medication.toLowerCase().includes(search.toLowerCase())
+      );
+      setMedResults(dataResult);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     getMeds();
-    console.log(selectMed);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const handleUpdate = (e) => {
+    e.preventDefault();
     setSearch(e.target.value);
-
     // if (e.target.name === "alertTime") {
     //   setAlertTime(e.target.value);
     // }
   };
+
+  const handleClick = (e, idx) => {
+    e.preventDefault();
+    let med = medications.splice(idx, 1).toString();
+    console.log(med);
+    setSelectMed(med);
+    console.log(clearOptions);
+    handleToggle();
+    // setSearch(selectMed);
+  };
+
+  const handleToggle = () => {
+    setClearOptions(!clearOptions);
+  };
+
   return (
     <div>
       <header className="page-header">
@@ -73,31 +92,25 @@ const MedListForm = () => {
               type="text"
               placeholder="Find Your Medication"
               onChange={handleUpdate}
-              value={search}
+              // value={search}
+              value={!selectMed ? search : selectMed}
               style={{ width: "35ch" }}
             />
-            <Paper elevation={8}>
-              {search &&
-                medications
-                  .filter((medication) =>
-                    medication.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map((medication, idx) => (
+            {handleToggle ? (
+              <Paper elevation={8}>
+                {search &&
+                  medResults.map((medication, idx) => (
                     <div
-                      onClick={(e) => {
-                        e.preventDefault();
-                        let med = medications.splice(idx, 1).toString();
-                        console.log(med);
-                        setSelectMed(med);
-                        setSearch(selectMed);
-                      }}
+                      className="med-select"
+                      onClick={handleClick}
                       value={selectMed}
                       key={idx}
                     >
                       {medication}
                     </div>
                   ))}
-            </Paper>
+              </Paper>
+            ) : null}
             <Dosage
               name="alertTime"
               // addDose={addDose}

@@ -10,3 +10,6 @@
 .dose-select {
   margin-top: 20px;
 }
+.med-select {
+  cursor: pointer;
+}
