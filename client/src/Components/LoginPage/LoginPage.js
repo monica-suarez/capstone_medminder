@@ -22,10 +22,10 @@ import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
-      width: "23ch",
+      width: "28ch",
     },
     textField: {
-      width: "25ch",
+      width: "35ch",
     },
   },
 }));
@@ -107,6 +107,7 @@ const LoginPage = (props) => {
         <Paper elevation={5} className="login-form">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
+              className={classes.usernameInput}
               name="username"
               onChange={handleChange}
               id="standard-username-input"
