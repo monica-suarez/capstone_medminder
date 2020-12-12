@@ -39,8 +39,7 @@ const LoginPage = (props) => {
   };
   const [loginUser, setLoginUser] = useState(defaultUserState);
   const [users, setUsers] = useState([]);
-
-  console.log(users);
+  // const [user, setUser] = useState({});
 
   const getUsers = () => {
     axios
@@ -48,19 +47,28 @@ const LoginPage = (props) => {
       .then((response) => setUsers(response.data))
       .catch((error) => console.log(error));
   };
-
+  console.log(users);
   // const getSelectedUser = () => {
-  //   users.filter(user => {return user.username === loginUser})
-  // need to assign user into key, or separate into obj
-  //   if(getSelectedUser === undefined){
-  //     window.alert("Username/password does not exist")
+  //   const oneUser = users.filter((u) => u.username === loginUser);
+  //   setUser(oneUser);
+  //   console.log(user);
+  //   if (user === undefined) {
+  //     window.alert("Username/password does not exist");
   //   } else {
   //     props.history.push({
   //       pathname: "/",
-  //       user: {user},
-  //     })
+  //       user: user,
+  //     });
   //   }
-  // }
+  // };
+
+  // const getSelectedUser = () => {
+  //   if (loginUser) {
+  //     const singleUser = users.filter((u) => u.username.startsWith(loginUser));
+  //     setUser(singleUser);
+  //   }
+  //   console.log(user);
+  // };
 
   useEffect(() => {
     getUsers();
@@ -83,9 +91,8 @@ const LoginPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
-    // props.history.push("/");
+    // getSelectedUser();
     window.location.replace("/");
-    // console.log(loginUser)
   };
 
   return (

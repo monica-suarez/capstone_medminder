@@ -27,7 +27,7 @@ const HomePage = () => {
       {/* <Header /> */}
       <Slide direction="right" in={checkAuth()}>
         <Paper className={classes.welcome}>
-          <Typography>Welcome: user name here</Typography>
+          <Typography>Welcome!</Typography>
         </Paper>
       </Slide>
       {/* <Header /> */}
