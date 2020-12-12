@@ -49,6 +49,19 @@ const LoginPage = (props) => {
       .catch((error) => console.log(error));
   };
 
+  // const getSelectedUser = () => {
+  //   users.filter(user => {return user.username === loginUser})
+  // need to assign user into key, or separate into obj
+  //   if(getSelectedUser === undefined){
+  //     window.alert("Username/password does not exist")
+  //   } else {
+  //     props.history.push({
+  //       pathname: "/",
+  //       user: {user},
+  //     })
+  //   }
+  // }
+
   useEffect(() => {
     getUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,7 +118,6 @@ const LoginPage = (props) => {
                 id="standard-adornment-password"
                 type={loginUser.showPassword ? "text" : "password"}
                 value={loginUser.password}
-                // onChange={handleChange("password")}
                 autoComplete="current-password"
                 endAdornment={
                   <InputAdornment position="end">
