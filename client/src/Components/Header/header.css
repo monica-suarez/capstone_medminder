@@ -12,5 +12,12 @@
   font-weight: bolder;
 }
 .login-title {
-  font-size: 72px;
+  font-size: 4.5rem;
+}
+@media (max-width: 650px) {
+  .login-title {
+    font-size: 3.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
